@@ -8,6 +8,7 @@
 
     <!-- Hosted meta Tags -->
     <meta name="branch:deeplink:cameFromWeb" content="true" />
+    <!-- <meta name="branch:deeplink:random" content="true" /> -->
 
 
     <title>SDK integration test</title>
@@ -33,10 +34,10 @@
     <script>
         // Add a dynamic Meta tag at a 50% random chance
         // Used to show a different Journey
-        // Might not work since the Journey will be instatiated before this.
         if (Math.random() > 0.5){
+            console.log("Lucky!")
             var link = document.createElement('meta');
-            link.setAttribute('branch:deeplink:name', 'random');
+            link.setAttribute('name', 'branch:deeplink:random');
             link.content = "true";
             document.getElementsByTagName('head')[0].appendChild(link);
         }
