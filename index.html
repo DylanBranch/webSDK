@@ -9,6 +9,7 @@
     <!-- Hosted meta Tags -->
     <meta name="branch:deeplink:cameFromWeb" content="true" />
 
+
     <title>SDK integration test</title>
     <script>
 
@@ -35,7 +36,7 @@
         // Might not work since the Journey will be instatiated before this.
         if (Math.random() > 0.5){
             var link = document.createElement('meta');
-            link.setAttribute('name', 'random');
+            link.setAttribute('branch:deeplink:name', 'random');
             link.content = "true";
             document.getElementsByTagName('head')[0].appendChild(link);
         }
