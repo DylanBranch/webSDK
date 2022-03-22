@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,19 +16,67 @@
         // load Branch
         (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent logEvent disableTracking".split(" "), 0);
         // init Branch
-        branch.init('key_live_hn1Th8D8yqgOuIgDE7fxefegzDhv5ZQL', function(err, data) {
+        branch.init('key_live_hn1Th8D8yqgOuIgDE7fxefegzDhv5ZQL', function (err, data) {
             console.log(err, data);
         });
-      </script>
+    </script>
 </head>
+
 <body>
-    
+    <div style="margin:auto; width:50%; padding:10px">
+        <button id="customEvent">Log a custom event</button>
+        <button id="lifecycleEvent">Log a lifecycle event</button>
+    </div>
+
+
     <script>
         // Add a dynamic Meta tag
-        var link = document.createElement('meta');  
-        link.setAttribute('name', 'timeStamp');  
-        link.content = Date.now();  
+        var link = document.createElement('meta');
+        link.setAttribute('name', 'timeStamp');
+        link.content = Date.now();
         document.getElementsByTagName('head')[0].appendChild(link);
+
+        // Log event functions
+        function logCustomEvent() {
+            var custom_data = { "btnClicked": "Log a custom event" };
+
+            branch.logEvent(
+                "btn_click",
+                custom_data,
+                function (err) { console.log(err); }
+            );
+        }
+
+        function logLifecycleEvent() {
+
+            var event_and_custom_data = {
+                "transaction_id": "tras_Id_1234",
+                "description": "Preferred purchase",
+                "registration_id": "12345"
+            };
+
+            var customer_event_alias = "clicked btn";
+
+            branch.logEvent(
+                "COMPLETE_REGISTRATION",
+                event_and_custom_data,
+                [],
+                customer_event_alias,
+                function (err) { console.log(err); }
+            );
+        }
+
+        // Event listeners for buttons
+        let customEventBtn = document.getElementById("customEvent");
+        customEventBtn.addEventListener('click', event => {
+            logCustomEvent();
+        });
+
+        let lifecycleEventBtn = document.getElementById("lifecycleEvent");
+        lifecycleEventBtn.addEventListener('click', event => {
+            logLifecycleEvent();
+        });
     </script>
 </body>
+
 </html>
