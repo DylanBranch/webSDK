@@ -30,11 +30,16 @@
 
 
     <script>
-        // Add a dynamic Meta tag
-        var link = document.createElement('meta');
-        link.setAttribute('name', 'timeStamp');
-        link.content = Date.now();
-        document.getElementsByTagName('head')[0].appendChild(link);
+        // Add a dynamic Meta tag at a 50% random chance
+        // Used to show a different Journey
+        // Might not work since the Journey will be instatiated before this.
+        if (Math.random() > 0.5){
+            var link = document.createElement('meta');
+            link.setAttribute('name', 'random');
+            link.content = "true";
+            document.getElementsByTagName('head')[0].appendChild(link);
+        }
+        
 
         // Log event functions
         function logCustomEvent() {
